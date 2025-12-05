@@ -1,0 +1,282 @@
+[
+  {
+    "id": 1,
+    "name": "Chase Freedom Flex",
+    "issuer": "Chase",
+    "ecosystem": "Chase",
+    "level": "Mid",
+    "secured": false,
+    "studentFriendly": false,
+    "rotatingCategories": true,
+    "unlockTransferPartners": false,
+    "minCreditScore": 690,
+    "rewards": {
+      "groceries": 3,
+      "dining": 3,
+      "travel": 5,
+      "gas": 1,
+      "other": 1,
+      "default": 1
+    }
+  },
+  {
+    "id": 2,
+    "name": "Chase Freedom Unlimited",
+    "issuer": "Chase",
+    "ecosystem": "Chase",
+    "level": "Beginner",
+    "secured": false,
+    "studentFriendly": false,
+    "rotatingCategories": false,
+    "unlockTransferPartners": false,
+    "minCreditScore": 690,
+    "rewards": {
+      "groceries": 1,
+      "dining": 3,
+      "travel": 3,
+      "gas": 1,
+      "other": 1,
+      "default": 1
+    }
+  },
+  {
+    "id": 3,
+    "name": "Discover It Cash Back",
+    "issuer": "Discover",
+    "ecosystem": "Discover",
+    "level": "Student",
+    "secured": false,
+    "studentFriendly": true,
+    "rotatingCategories": true,
+    "unlockTransferPartners": false,
+    "minCreditScore": 670,
+    "rewards": {
+      "groceries": 5,
+      "dining": 1,
+      "travel": 1,
+      "gas": 1,
+      "other": 1,
+      "default": 1
+    }
+  },
+  {
+    "id": 4,
+    "name": "Amex Blue Cash Preferred",
+    "issuer": "American Express",
+    "ecosystem": "American Express",
+    "level": "Premium",
+    "secured": false,
+    "studentFriendly": false,
+    "rotatingCategories": false,
+    "unlockTransferPartners": false,
+    "minCreditScore": 700,
+    "rewards": {
+      "groceries": 6,
+      "dining": 1,
+      "travel": 1,
+      "gas": 1,
+      "other": 1,
+      "default": 1
+    }
+  },
+  {
+    "id": 5,
+    "name": "Amex Gold",
+    "issuer": "American Express",
+    "ecosystem": "American Express",
+    "level": "Premium",
+    "secured": false,
+    "studentFriendly": false,
+    "rotatingCategories": false,
+    "unlockTransferPartners": true,
+    "minCreditScore": 720,
+    "rewards": {
+      "groceries": 4,
+      "dining": 4,
+      "travel": 3,
+      "gas": 1,
+      "other": 1,
+      "default": 1
+    }
+  },
+  {
+    "id": 6,
+    "name": "Citi Custom Cash",
+    "issuer": "Citi",
+    "ecosystem": "Citi",
+    "level": "Mid",
+    "secured": false,
+    "studentFriendly": false,
+    "rotatingCategories": false,
+    "unlockTransferPartners": false,
+    "minCreditScore": 680,
+    "rewards": {
+      "groceries": 5,
+      "dining": 5,
+      "travel": 1,
+      "gas": 1,
+      "other": 1,
+      "default": 1
+    }
+  },
+  {
+    "id": 7,
+    "name": "Wells Fargo Autograph",
+    "issuer": "Wells Fargo",
+    "ecosystem": "Wells Fargo",
+    "level": "Mid",
+    "secured": false,
+    "studentFriendly": false,
+    "rotatingCategories": false,
+    "unlockTransferPartners": false,
+    "minCreditScore": 700,
+    "rewards": {
+      "groceries": 3,
+      "dining": 3,
+      "travel": 3,
+      "gas": 3,
+      "other": 1,
+      "default": 1
+    }
+  },
+  {
+    "id": 8,
+    "name": "Capital One SavorOne",
+    "issuer": "Capital One",
+    "ecosystem": "Capital One",
+    "level": "Mid",
+    "secured": false,
+    "studentFriendly": false,
+    "rotatingCategories": false,
+    "unlockTransferPartners": false,
+    "minCreditScore": 690,
+    "rewards": {
+      "groceries": 3,
+      "dining": 3,
+      "travel": 2,
+      "gas": 1,
+      "other": 1,
+      "default": 1
+    }
+  },
+  {
+    "id": 9,
+    "name": "Capital One VentureOne",
+    "issuer": "Capital One",
+    "ecosystem": "Capital One",
+    "level": "Mid",
+    "secured": false,
+    "studentFriendly": false,
+    "rotatingCategories": false,
+    "unlockTransferPartners": true,
+    "minCreditScore": 700,
+    "rewards": {
+      "groceries": 1,
+      "dining": 1,
+      "travel": 2,
+      "gas": 1,
+      "other": 1,
+      "default": 1
+    }
+  },
+  {
+    "id": 10,
+    "name": "Chase Sapphire Preferred",
+    "issuer": "Chase",
+    "ecosystem": "Chase",
+    "level": "Premium",
+    "secured": false,
+    "studentFriendly": false,
+    "rotatingCategories": false,
+    "unlockTransferPartners": true,
+    "minCreditScore": 720,
+    "rewards": {
+      "groceries": 2,
+      "dining": 3,
+      "travel": 3,
+      "gas": 1,
+      "other": 1,
+      "default": 1
+    }
+  },
+  {
+    "id": 11,
+    "name": "Bank of America Customized Cash Rewards",
+    "issuer": "Bank of America",
+    "ecosystem": "Bank of America",
+    "level": "Beginner",
+    "secured": false,
+    "studentFriendly": false,
+    "rotatingCategories": false,
+    "unlockTransferPartners": false,
+    "minCreditScore": 680,
+    "rewards": {
+      "groceries": 3,
+      "dining": 1,
+      "travel": 1,
+      "gas": 3,
+      "other": 1,
+      "default": 1
+    }
+  },
+  {
+    "id": 12,
+    "name": "Wells Fargo Active Cash",
+    "issuer": "Wells Fargo",
+    "ecosystem": "Wells Fargo",
+    "level": "Beginner",
+    "secured": false,
+    "studentFriendly": false,
+    "rotatingCategories": false,
+    "unlockTransferPartners": false,
+    "minCreditScore": 700,
+    "rewards": {
+      "groceries": 2,
+      "dining": 2,
+      "travel": 2,
+      "gas": 2,
+      "other": 2,
+      "default": 2
+    }
+  },
+  {
+    "id": 13,
+    "name": "Capital One Secured",
+    "issuer": "Capital One",
+    "ecosystem": "Capital One",
+    "level": "Secured",
+    "secured": true,
+    "studentFriendly": false,
+    "rotatingCategories": false,
+    "unlockTransferPartners": false,
+    "minCreditScore": 300,
+    "rewards": {
+      "groceries": 1,
+      "dining": 1,
+      "travel": 1,
+      "gas": 1,
+      "other": 1,
+      "default": 1
+    }
+  },
+  {
+    "id": 14,
+    "name": "Student Cash Back",
+    "issuer": "Discover",
+    "ecosystem": "Discover",
+    "level": "Student",
+    "secured": false,
+    "studentFriendly": true,
+    "rotatingCategories": false,
+    "unlockTransferPartners": false,
+    "minCreditScore": 300,
+    "rewards": {
+      "groceries": 2,
+      "dining": 2,
+      "travel": 1,
+      "gas": 1,
+      "other": 1,
+      "default": 1
+    }
+  }
+]
