@@ -1,6 +1,6 @@
 # CardMatch - Ready for Submission
 
-## ✅ Completed Items
+## Completed Items
 
 ### 1. Backend (Node.js + Express)
 - [x] Express server with CORS enabled
@@ -96,9 +96,9 @@ Each scenario shows different top 3 results proving the rules work.
 **Issues Fixed:**
 - ❌ Removed duplicate "Student?" checkbox
 - ❌ Removed per-card reward list (kept only Best by Category + Top 3)
-- ✅ Verified different profiles return different card recommendations
-- ✅ JSON cleaned and validated
-- ✅ All 9 rules implemented and tested
+- Verified different profiles return different card recommendations
+- JSON cleaned and validated
+- All 9 rules implemented and tested
 
 ---
 

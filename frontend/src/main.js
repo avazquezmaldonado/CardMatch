@@ -1,16 +1,26 @@
+// Get recommendation button handler
+// This function reads all the form inputs and sends them to the backend
 async function recommend() {
+  // Get credit score from input
   const creditScore = Number(document.getElementById('creditScore').value);
+  // Get number of accounts opened in last 24 months
   const accountsOpened24 = Number(document.getElementById('accounts24').value);
+  // Check if user checked the student checkbox
   const isStudent = !!document.getElementById('isStudent') && document.getElementById('isStudent').checked;
   
+  // Create profile object with basic info
   const profile = { creditScore, accountsOpened24, isStudent };
   
+  // Get ecosystem preference (Chase, Amex, etc)
   const ecosystem = document.getElementById('ecosystem') ? document.getElementById('ecosystem').value : 'Any';
+  // Get selected travel frequency radio button
   const travelFrequencyEl = document.querySelector('input[name="travelFrequency"]:checked');
   const travelFrequency = travelFrequencyEl ? travelFrequencyEl.value : 'Never';
+  // Get selected reward preference radio button
   const rewardPreferenceEl = document.querySelector('input[name="rewardPreference"]:checked');
   const rewardPreference = rewardPreferenceEl ? rewardPreferenceEl.value : 'Cash Back';
   
+  // Get monthly spending amounts from form
   const spending = {
     groceries: Number(document.getElementById('spend_groceries').value) || 0,
     dining: Number(document.getElementById('spend_dining').value) || 0,
@@ -18,13 +28,16 @@ async function recommend() {
     other: Number(document.getElementById('spend_other').value) || 0
   };
   
+  // Add the preferences to the profile object
   profile.preferredEcosystem = ecosystem;
   profile.travelFrequency = travelFrequency;
   profile.rewardPreference = rewardPreference;
   
+  // Create request body with profile and spending info
   const body = { profile, spending };
-  console.log('Recommendation request body:', JSON.parse(JSON.stringify(body)));
+  console.log('Sending request to backend:', body);
   
+  // Try to fetch recommendations from the backend
   try {
     const res = await fetch('http://localhost:4000/api/cards/recommend', {
       method: 'POST',
@@ -32,30 +45,41 @@ async function recommend() {
       body: JSON.stringify(body)
     });
     const json = await res.json();
+    // Display the results on the page
     renderResults(json);
   } catch (err) {
-    console.error('Fetch error:', err);
+    console.error('Error:', err);
     alert('Error fetching recommendations. Make sure backend is running on port 4000.');
   }
 }
 
+// Display the recommendation results on the page
 function renderResults(data) {
+  // Get the results section
   const el = document.getElementById('results');
+  // Clear any previous results
   el.innerHTML = '';
+  // If no data, don't show anything
   if (!data) return;
   
+  // Get the best cards by category and best overall cards
   const bestByCategory = data.bestByCategory || {};
   const bestOverall = data.bestOverall || [];
   
-  const byCatHtml = Object.entries(bestByCategory)
-    .map(([cat, v]) => `<li><strong>${cat}</strong>: ${v.name} (${v.rate}% back)</li>`)
-    .join('');
+  // Create HTML for best by category section
+  let byCatHtml = '';
+  for (const [cat, v] of Object.entries(bestByCategory)) {
+    byCatHtml += `<li><strong>${cat}</strong>: ${v.name} (${v.rate}% back)</li>`;
+  }
   
-  const overallHtml = bestOverall
-    .slice(0, 3)
-    .map((o) => `<li class="mb-2"><strong>${o.name}</strong> — $${o.estimates.annual}/yr</li>`)
-    .join('');
+  // Create HTML for top 3 recommended cards
+  let overallHtml = '';
+  for (let i = 0; i < Math.min(3, bestOverall.length); i++) {
+    const card = bestOverall[i];
+    overallHtml += `<li class="mb-2"><strong>${card.name}</strong> — $${card.estimates.annual}/yr</li>`;
+  }
   
+  // Show the results in the page
   el.innerHTML = `
     <div class="p-4 bg-white rounded shadow">
       <h3 class="font-semibold text-lg mb-2">Best by Category</h3>
@@ -67,14 +91,19 @@ function renderResults(data) {
   `;
 }
 
+// Load sample data into the form
 function loadSample() {
+  // Set example credit score
   document.getElementById('creditScore').value = 740;
+  // Set example accounts opened
   document.getElementById('accounts24').value = 0;
+  // Set example spending amounts
   document.getElementById('spend_groceries').value = 500;
   document.getElementById('spend_dining').value = 150;
   document.getElementById('spend_travel').value = 200;
   document.getElementById('spend_other').value = 0;
 }
 
+// Add event listeners when page loads
 document.getElementById('btnRecommend').addEventListener('click', recommend);
 document.getElementById('btnLoadSample').addEventListener('click', loadSample);

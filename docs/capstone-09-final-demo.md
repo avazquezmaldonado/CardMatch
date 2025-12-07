@@ -151,13 +151,13 @@ const res = await fetch('https://cardmatch-api.onrender.com/api/cards/recommend'
 
 ## Key Improvements Made
 
-✅ **Cleaned JSON data** — `cards.json` has proper formatting with 14 cards and correct metadata  
-✅ **Removed duplicate UI elements** — Student checkbox appears once, not twice  
-✅ **Simplified results display** — Shows only "Best by Category" + "Top 3 Cards" (removed full card list)  
-✅ **Varied recommendations** — Backend returns different cards based on profile (tested with multiple scenarios)  
-✅ **Full rule implementation** — All 9 business rules active and applying correctly  
-✅ **Responsive design** — Mobile-friendly layout with proper grid and spacing  
-✅ **Backend validation** — Low-credit users receive only eligible cards  
+**Cleaned JSON data** — `cards.json` has proper formatting with 14 cards and correct metadata  
+**Removed duplicate UI elements** — Student checkbox appears once, not twice  
+**Simplified results display** — Shows only "Best by Category" + "Top 3 Cards" (removed full card list)  
+**Varied recommendations** — Backend returns different cards based on profile (tested with multiple scenarios)  
+**Full rule implementation** — All 9 business rules active and applying correctly  
+**Responsive design** — Mobile-friendly layout with proper grid and spacing  
+**Backend validation** — Low-credit users receive only eligible cards  
 
 ---
 

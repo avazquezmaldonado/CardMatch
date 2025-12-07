@@ -35,11 +35,11 @@ No external APIs are required — all data and logic are internal and stored in 
 
 ## Links
 
-- Project plan: (placeholder)
-- UI mockups: (placeholder)
-- API spec: (placeholder)
+- Project plan: See `/docs/capstone-02-planning.md`
+- UI mockups: See `/docs/capstone-03-frontend-design.md`
+- API spec: See `/docs/capstone-04-backend-design.md`
 
 
 ---
 
-This document will be expanded into milestone documents for planning, design, and audits in subsequent commits.
+All milestone documents are available in the `/docs` folder. This project document has been expanded into detailed milestone docs for planning, design, and audits in subsequent commits.

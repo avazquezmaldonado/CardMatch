@@ -1,16 +1,21 @@
 /*
-  Rewards Service with Explanation Reasons
-  Each recommendation now returns:
-    - estimates
-    - owned flag
-    - reasoning list explaining WHY it ranked higher
+  Rewards Service - Calculates card recommendations based on user profile
+  This service:
+  1. Filters eligible cards based on credit score and rules
+  2. Calculates estimated rewards for each eligible card
+  3. Applies multipliers based on user preferences
+  4. Ranks cards by annual rewards value
+  5. Returns top recommendations with explanations
 */
 
+// Check if a user is eligible for a specific card
 function isEligible(card, profile) {
+  // If card has no min score, everyone is eligible
   if (!card.minCreditScore) return true;
+  // If no profile data, allow it
   if (!profile || typeof profile.creditScore !== "number") return true;
 
-  // Chase 5/24 rule
+  // Chase 5/24 rule: if user opened 5+ accounts in 24 months, they can't get Chase cards
   if (
     profile.accountsOpened24 >= 5 &&
     String(card.issuer).toLowerCase() === "chase"
@@ -20,53 +25,63 @@ function isEligible(card, profile) {
 
   const level = (card.level || "").toLowerCase();
 
-  // Very low score: only secured / beginner / student
+  // If credit score is very low (< 630), only show secured/beginner/student cards
   if (profile.creditScore < 630) {
     if (!(card.secured || level === "beginner" || level === "student")) {
       return false;
     }
   }
 
-  // Mid-tier: block premium
+  // If credit score is mid-range (630-680), don't show premium cards
   if (profile.creditScore >= 630 && profile.creditScore < 680) {
     if (level === "premium") return false;
   }
 
+  // Finally, check that credit score meets the card's minimum
   return profile.creditScore >= card.minCreditScore;
 }
 
+// Calculate estimated rewards for a card based on user's spending
 function estimateRewardsForCard(card, spending) {
+  // Point value is how much each point is worth (e.g., 0.96 cents per point)
   const pointValueCents =
     typeof card.pointValueCents === "number" ? card.pointValueCents : 1.0;
 
   let annual = 0;
 
+  // Go through each spending category and calculate rewards
   for (const [cat, amount] of Object.entries(spending || {})) {
+    // Get the reward rate for this category (or default if not specified)
     const rate =
       (card.rewards && (card.rewards[cat] || card.rewards.default)) || 0;
 
-    // monthly amount * 12 * % * value per point
+    // Formula: monthly * 12 months * rate * value per point
     const annualValue = amount * 12 * rate * (pointValueCents / 100);
     annual += annualValue;
   }
 
+  // Subtract annual fee if there is one
   if (card.annualFee && card.annualFee > 0) {
     annual -= card.annualFee;
   }
 
+  // Round to 2 decimal places
   const annualRounded = Number(annual.toFixed(2));
   const monthlyRounded = Number((annualRounded / 12).toFixed(2));
 
   return { monthly: monthlyRounded, annual: annualRounded };
 }
 
+// Main function that recommends cards to a user
 function recommendCards(cards, profile, spending, ownedCards = []) {
+  // First, filter out ineligible cards
   const eligible = cards.filter((c) => isEligible(c, profile));
 
-  // Owned card ecosystem synergy flags
+  // Track which cards the user already owns
   const ownedNames = new Set();
   const ownedIssuers = new Set();
 
+  // Look through owned cards and find them in our card list
   for (const o of ownedCards) {
     const found = cards.find(
       (c) =>
@@ -79,6 +94,7 @@ function recommendCards(cards, profile, spending, ownedCards = []) {
     }
   }
 
+  // Get user preferences
   const ecosPref =
     profile.preferredEcosystem || profile.ecosystem || "Any";
   const travelFreq =
@@ -86,21 +102,22 @@ function recommendCards(cards, profile, spending, ownedCards = []) {
   const rewardPref =
     profile.rewardPreference || profile.rewardPref || "Cash Back";
 
+  // Score each eligible card
   const scored = eligible.map((card) => {
-    let reasons = [];
+    let reasons = []; // Track WHY we recommend this card
     const base = estimateRewardsForCard(card, spending);
-    let multiplier = 1.0;
+    let multiplier = 1.0; // We'll multiply the base rewards by this
 
     const issuer = (card.ecosystem || card.issuer || "").toLowerCase();
     const level = (card.level || "").toLowerCase();
 
-    // Student boost
+    // Boost score for students if the card is student-friendly
     if (profile.isStudent && card.studentFriendly) {
       multiplier *= 1.2;
       reasons.push("Good for students");
     }
 
-    // Ecosystem preference match
+    // Boost score if card matches preferred ecosystem
     if (ecosPref && ecosPref !== "Any") {
       if (issuer.includes(ecosPref.toLowerCase())) {
         multiplier *= 1.1;
@@ -108,7 +125,8 @@ function recommendCards(cards, profile, spending, ownedCards = []) {
       }
     }
 
-    // Ecosystem synergy (example: Chase Freedom + Sapphire)
+    // Ecosystem synergy: if you own one card, another works better
+    // Example: Chase Freedom + Sapphire Preferred work together
     if (
       ownedNames.has("Chase Freedom Flex") ||
       ownedNames.has("Chase Freedom Unlimited")
@@ -133,32 +151,37 @@ function recommendCards(cards, profile, spending, ownedCards = []) {
       }
     }
 
+    // Minor boost if card is from same issuer as card you already own
     if (ownedIssuers.has(card.ecosystem || card.issuer)) {
       multiplier *= 1.05;
       reasons.push("Same ecosystem as cards you already own");
     }
 
-    // Reward preference scoring
+    // Helper function to get reward rate for a category
     const r = (cat) =>
       (card.rewards && (card.rewards[cat] || card.rewards.default)) || 0;
 
+    // If user prefers cash back, boost flat-rate cards
     if (rewardPref === "Cash Back") {
       const strongCash = r("groceries") + r("dining") >= 6;
       if (strongCash) {
         multiplier *= 1.07;
         reasons.push("Strong cash back benefits");
       }
+      // Penalize premium travel cards for cash-back users
       if (level === "premium" && r("travel") >= 3) {
         multiplier *= 0.9;
         reasons.push("Premium travel card penalized under cash back preference");
       }
     }
 
+    // If user prefers points/miles, boost travel-heavy cards
     if (rewardPref === "Points/Miles") {
       if (r("travel") >= 3 || r("dining") >= 3) {
         multiplier *= 1.08;
         reasons.push("Optimized for points + travel earning");
       }
+      // Penalize pure cash-back cards for points users
       const pureCash =
         (card.rewards && (card.rewards.default || 0) >= 2) &&
         !(r("travel") >= 3 || r("dining") >= 3);
@@ -168,7 +191,7 @@ function recommendCards(cards, profile, spending, ownedCards = []) {
       }
     }
 
-    // Travel frequency logic
+    // Travel frequency adjustments
     if (String(travelFreq).toLowerCase() === "often" && r("travel") >= 3) {
       multiplier *= 1.1;
       reasons.push("Better for frequent travelers");
@@ -178,13 +201,13 @@ function recommendCards(cards, profile, spending, ownedCards = []) {
       reasons.push("Travel rewards de-emphasized");
     }
 
-    // Rotating categories benefit
+    // Boost for cards with rotating categories
     if (card.rotatingCategories) {
       multiplier *= 1.05;
       reasons.push("Rotating category bonus potential");
     }
 
-    // Transfer partner synergy
+    // Boost for cards that unlock transfer partners
     if (card.unlockTransferPartners) {
       const match = Array.from(ownedIssuers).some(
         (e) => e.toLowerCase() === issuer
@@ -195,6 +218,7 @@ function recommendCards(cards, profile, spending, ownedCards = []) {
       }
     }
 
+    // Apply multiplier to get final score
     const adjustedAnnual = Number((base.annual * multiplier).toFixed(2));
     const adjustedMonthly = Number((adjustedAnnual / 12).toFixed(2));
 
@@ -206,16 +230,17 @@ function recommendCards(cards, profile, spending, ownedCards = []) {
         annual: adjustedAnnual
       },
       owned: ownedNames.has(card.name),
-      reasons // <-- NEW: explanation list
+      reasons // Explanation list for why this card scored well
     };
   });
 
-  // Best by category (unchanged)
+  // Find best card by category
   const categories = Object.keys(spending || {});
   const bestByCategory = {};
 
   for (const cat of categories) {
     let best = null;
+    // Look through all eligible cards to find highest rate for this category
     for (const card of eligible) {
       const rate =
         (card.rewards && (card.rewards[cat] || card.rewards.default)) || 0;
@@ -226,7 +251,7 @@ function recommendCards(cards, profile, spending, ownedCards = []) {
     if (best) bestByCategory[cat] = best;
   }
 
-  // Top 3 overall
+  // Sort by annual rewards and get top 3
   const sorted = scored
     .slice()
     .sort((a, b) => b.estimates.annual - a.estimates.annual);

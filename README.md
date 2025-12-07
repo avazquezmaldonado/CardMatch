@@ -10,14 +10,22 @@ This project demonstrates full-stack web development with:
 - **Data**: JSON-based card catalog and user profiles
 - **Documentation**: 9 milestone capstone documents
 
+## My Approach
+
+I built CardMatch to solve a real problem: picking the best credit card is hard without manually comparing dozens of cards and doing complex math. My solution:
+1. Let users input their profile (credit score, spending habits)
+2. Calculate rewards for each eligible card based on their spending
+3. Show the top 3 cards + best card per category
+
+The scoring algorithm applies business rules (like Chase's 5/24 rule) and preferences to calculate realistic annual rewards values.
+
 ## Features
 
-✅ **Dynamic Recommendations** — Personalized card rankings based on user spending  
-✅ **Deterministic Scoring** — Clear annual value calculation (rewards minus fees)  
-✅ **Eligibility Filtering** — Credit score and student status checks  
-✅ **Category Breakdown** — Best card for each spending category  
-✅ **Responsive Design** — Works on desktop and mobile  
-✅ **Real-time Results** — Instant feedback as users adjust inputs  
+- Dynamic Recommendations — Changes based on your spending
+- Eligibility Checking — Filters by credit score and rules
+- Category Breakdown — Best card for groceries, dining, travel, etc.
+- Responsive Design — Works on desktop and mobile
+- Real-time Results — See recommendations immediately
 
 ## Quick Start
 
@@ -30,11 +38,19 @@ npm start
 Backend runs on **http://localhost:4000**
 
 ### Frontend Setup
-Open `frontend/index.html` in a browser, or run a simple HTTP server:
+Open `frontend/index.html` in a browser, or use Python's HTTP server:
 ```bash
 python3 -m http.server 8000
 # Visit http://localhost:8000/frontend/
 ```
+
+## How It Works
+
+1. **User Input** → Enter credit score, spending amounts, preferences
+2. **Eligibility Filter** → Backend checks if you qualify for each card
+3. **Score Calculation** → For each eligible card: (monthly × 12 × rate × point value) - annual fee
+4. **Apply Modifiers** → Boost score if card matches your preferences
+5. **Rank & Display** → Sort by annual value, show top 3 + best by category
 
 ## API
 
@@ -80,64 +96,70 @@ Response:
 ```
 CardMatch/
 ├── backend/
-│   ├── app.js              # Express entrypoint
-│   ├── package.json
-│   ├── routes/
-│   │   └── cards.js        # API routes
-│   ├── controllers/
-│   │   └── cardsController.js
-│   └── services/
-│       ├── dataStore.js
-│       └── rewardsService.js
+│   ├── app.js              # Express server
+│   ├── routes/cards.js     # API routes
+│   ├── controllers/cardsController.js
+│   ├── services/
+│   │   ├── dataStore.js
+│   │   └── rewardsService.js  # Scoring logic
+│   └── package.json
 ├── frontend/
 │   ├── index.html
 │   ├── styles.css
-│   └── src/
-│       └── main.js
+│   └── src/main.js
 ├── data/
-│   ├── cards.json          # 14 credit cards with metadata
+│   ├── cards.json          # 22 credit cards
 │   ├── profile.json
 │   └── spending.json
 ├── docs/
 │   ├── capstone-01.md through capstone-09-final-demo.md
-│   └── (9 milestone documents)
+│   └── (Milestone documentation)
 └── README.md (this file)
 ```
 
 ## Capstone Milestones
 
-| Milestone | Title | Status |
-|-----------|-------|--------|
-| 01 | Project Proposal | ✅ Complete |
-| 02 | Planning & Specification | ✅ Complete |
-| 03 | Frontend Design | ✅ Complete |
-| 04 | Backend Design | ✅ Complete |
-| 05 | Data Design | ✅ Complete |
-| 06 | Client Audit | ✅ Complete |
-| 07 | Server Audit | ✅ Complete |
-| 08 | Data Audit | ✅ Complete |
-| 09 | Final Demo & Submission | ✅ Complete |
+| # | Title | Status |
+|---|-------|--------|
+| 01 | Project Proposal | Complete |
+| 02 | Planning & Specification | Complete |
+| 03 | Frontend Design | Complete |
+| 04 | Backend Design | Complete |
+| 05 | Data Design | Complete |
+| 06 | Client Audit | Complete |
+| 07 | Server Audit | Complete |
+| 08 | Data Audit | Complete |
+| 09 | Final Demo & Submission | Complete |
 
-All milestone documentation is in `/docs`.
+All documentation is in `/docs`.
 
 ## Testing
 
 ### Manual Testing
-1. Start the backend: `npm start` (from `/backend`)
-2. Open `frontend/index.html` in browser
-3. Enter credit score, spending amounts, and preferences
+1. Start backend: `npm start`
+2. Open `frontend/index.html`
+3. Enter credit score and spending
 4. Click "Get Recommendations"
-5. Verify results display below form
+5. Check results appear
 
-### Sample Data
-Click "Load Sample Data" to populate the form with test values.
+### Try It Out
+- Credit score: 750, Spending: $400 groceries → See recommendations
+- Credit score: 600, Spending: $200 dining → See beginner cards only
+- Click "Load Sample Data" for quick test
 
-## Technologies Used
+## Key Decisions
 
-- **Frontend**: HTML5, Tailwind CSS, Vanilla JavaScript (ES6+)
+- **No database**: Used JSON files to keep it simple and focused on the algorithm
+- **Vanilla JS**: No frameworks, easier to understand the code
+- **Tailwind CSS**: Fast styling without writing custom CSS
+- **Modular services**: Separated scoring logic from routes for clarity
+
+## Technologies
+
+- **Frontend**: HTML5, Tailwind CSS, Vanilla JavaScript
 - **Backend**: Node.js, Express.js
 - **Data**: JSON files
-- **Documentation**: Markdown
+- **Docs**: Markdown
 
 ## Author
 
@@ -147,4 +169,4 @@ December 2025
 
 ---
 
-**For submission**: All milestones are complete and documented. The application is functional and ready for demonstration.
+**Status**: Complete and ready for evaluation. All 9 milestones documented.
