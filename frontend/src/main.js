@@ -1,5 +1,8 @@
 // Get recommendation button handler
 // This function reads all the form inputs and sends them to the backend
+// Store current recommendations for export
+let lastRecommendations = null;
+
 async function recommend() {
   // Get credit score from input
   const creditScore = Number(document.getElementById('creditScore').value);
@@ -45,12 +48,52 @@ async function recommend() {
       body: JSON.stringify(body)
     });
     const json = await res.json();
+    // Check if there was an error response
+    if (!res.ok) {
+      alert('Error: ' + (json.error || 'Unknown error'));
+      return;
+    }
+    // Store recommendations for export
+    lastRecommendations = json;
     // Display the results on the page
     renderResults(json);
+    // Show export button
+    document.getElementById('btnExport').style.display = 'inline-block';
   } catch (err) {
     console.error('Error:', err);
     alert('Error fetching recommendations. Make sure backend is running on port 4000.');
   }
+}
+
+// Export recommendations as JSON file
+function exportResults() {
+  // If no recommendations, don't export
+  if (!lastRecommendations) {
+    alert('No recommendations to export. Please get recommendations first.');
+    return;
+  }
+  
+  // Create JSON data with timestamp
+  const exportData = {
+    exportedAt: new Date().toISOString(),
+    recommendations: lastRecommendations
+  };
+  
+  // Convert to JSON string
+  const json = JSON.stringify(exportData, null, 2);
+  
+  // Create a blob and download link
+  const blob = new Blob([json], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = `cardmatch-recommendations-${Date.now()}.json`;
+  
+  // Trigger download
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
 }
 
 // Display the recommendation results on the page
@@ -107,3 +150,4 @@ function loadSample() {
 // Add event listeners when page loads
 document.getElementById('btnRecommend').addEventListener('click', recommend);
 document.getElementById('btnLoadSample').addEventListener('click', loadSample);
+document.getElementById('btnExport').addEventListener('click', exportResults);
