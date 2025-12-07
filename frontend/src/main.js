@@ -147,7 +147,59 @@ function loadSample() {
   document.getElementById('spend_other').value = 0;
 }
 
+// Save form data to localStorage
+function saveFormData() {
+  const formData = {
+    creditScore: document.getElementById('creditScore').value,
+    accounts24: document.getElementById('accounts24').value,
+    isStudent: document.getElementById('isStudent') ? document.getElementById('isStudent').checked : false,
+    ecosystem: document.getElementById('ecosystem') ? document.getElementById('ecosystem').value : '',
+    travelFrequency: document.querySelector('input[name="travelFrequency"]:checked') ? document.querySelector('input[name="travelFrequency"]:checked').value : '',
+    rewardPreference: document.querySelector('input[name="rewardPreference"]:checked') ? document.querySelector('input[name="rewardPreference"]:checked').value : '',
+    spend_groceries: document.getElementById('spend_groceries').value,
+    spend_dining: document.getElementById('spend_dining').value,
+    spend_travel: document.getElementById('spend_travel').value,
+    spend_other: document.getElementById('spend_other').value
+  };
+  localStorage.setItem('cardmatchFormData', JSON.stringify(formData));
+}
+
+// Load form data from localStorage
+function loadFormData() {
+  const saved = localStorage.getItem('cardmatchFormData');
+  if (saved) {
+    try {
+      const formData = JSON.parse(saved);
+      if (formData.creditScore) document.getElementById('creditScore').value = formData.creditScore;
+      if (formData.accounts24) document.getElementById('accounts24').value = formData.accounts24;
+      if (formData.isStudent && document.getElementById('isStudent')) document.getElementById('isStudent').checked = formData.isStudent;
+      if (formData.ecosystem && document.getElementById('ecosystem')) document.getElementById('ecosystem').value = formData.ecosystem;
+      if (formData.spend_groceries) document.getElementById('spend_groceries').value = formData.spend_groceries;
+      if (formData.spend_dining) document.getElementById('spend_dining').value = formData.spend_dining;
+      if (formData.spend_travel) document.getElementById('spend_travel').value = formData.spend_travel;
+      if (formData.spend_other) document.getElementById('spend_other').value = formData.spend_other;
+      // Set radio buttons
+      if (formData.travelFrequency) {
+        const travelEl = document.querySelector(`input[name="travelFrequency"][value="${formData.travelFrequency}"]`);
+        if (travelEl) travelEl.checked = true;
+      }
+      if (formData.rewardPreference) {
+        const rewardEl = document.querySelector(`input[name="rewardPreference"][value="${formData.rewardPreference}"]`);
+        if (rewardEl) rewardEl.checked = true;
+      }
+    } catch (e) {
+      console.error('Error loading form data:', e);
+    }
+  }
+}
+
 // Add event listeners when page loads
-document.getElementById('btnRecommend').addEventListener('click', recommend);
-document.getElementById('btnLoadSample').addEventListener('click', loadSample);
-document.getElementById('btnExport').addEventListener('click', exportResults);
+document.addEventListener('DOMContentLoaded', function() {
+  loadFormData();
+  document.getElementById('btnRecommend').addEventListener('click', function() {
+    recommend();
+    saveFormData();
+  });
+  document.getElementById('btnLoadSample').addEventListener('click', loadSample);
+  document.getElementById('btnExport').addEventListener('click', exportResults);
+});
