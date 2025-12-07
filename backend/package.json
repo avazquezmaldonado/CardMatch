@@ -4,7 +4,8 @@
   "main": "app.js",
   "license": "MIT",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "test:recommend": "ts-node/transpile-only tests/testRecommend.ts"
   },
   "dependencies": {
     "body-parser": "^1.20.2",

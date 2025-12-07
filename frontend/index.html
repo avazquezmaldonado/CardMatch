@@ -5,43 +5,68 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>CardMatch - Demo</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./styles.css">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
   </head>
 
   <body class="bg-neutral-50 text-neutral-900 font-inter">
     <div class="min-h-screen flex items-center justify-center p-6">
       <div class="w-full max-w-3xl">
         <header class="mb-6">
-          <div class="bg-gradient-to-r from-white/60 via-white/40 to-white/60 backdrop-blur rounded-lg p-4 shadow-sm">
+          <div
+            class="bg-gradient-to-r from-white/60 via-white/40 to-white/60 backdrop-blur rounded-lg p-4 shadow-sm"
+          >
             <h1 class="text-2xl font-semibold tracking-tight">CardMatch</h1>
-            <p class="text-sm text-neutral-600">Credit card recommendations and rewards optimizer</p>
+            <p class="text-sm text-neutral-600">
+              Credit card recommendations and rewards optimizer
+            </p>
           </div>
         </header>
 
-        <main class="card-container bg-white rounded-2xl shadow-md overflow-hidden">
+        <main class="bg-white rounded-2xl shadow-md overflow-hidden">
           <div class="p-6 md:p-8 space-y-6">
-            <!-- Profile & Spending grouped in responsive grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <section id="profile" class="p-4 bg-gradient-to-b from-white to-neutral-50 rounded-lg border border-neutral-100">
+              <!-- PROFILE PANEL -->
+              <section
+                id="profile"
+                class="p-4 bg-gradient-to-b from-white to-neutral-50 rounded-lg border border-neutral-100"
+              >
                 <h2 class="text-lg font-medium mb-3">Profile</h2>
                 <div class="space-y-3">
-                  <label class="block text-sm text-neutral-700">Credit score
-                    <input id="creditScore" type="number" value="720" class="input-field mt-1 w-40 md:w-48" />
-                  </label>
-                  <label class="block text-sm text-neutral-700">Accounts opened (24mo)
-                    <input id="accounts24" type="number" value="1" class="input-field mt-1 w-40 md:w-48" />
-                  </label>
-                  <label class="flex items-center gap-2 text-sm text-neutral-700 mt-2">
+                  <label class="block text-sm text-neutral-700"
+                    >Credit score
+                    <input
+                      id="creditScore"
+                      type="number"
+                      value="720"
+                      class="input-field mt-1 w-40 md:w-48"
+                  /></label>
+
+                  <label class="block text-sm text-neutral-700"
+                    >Accounts opened (24mo)
+                    <input
+                      id="accounts24"
+                      type="number"
+                      value="1"
+                      class="input-field mt-1 w-40 md:w-48"
+                  /></label>
+
+                  <label
+                    class="flex items-center gap-2 text-sm text-neutral-700 mt-2"
+                  >
                     <input id="isStudent" type="checkbox" class="w-4 h-4" />
                     <span>Student?</span>
                   </label>
-                  <!-- New profile fields: Preferred ecosystem, Travel frequency, Reward type -->
+
                   <div class="pt-2">
-                    <label class="block text-sm text-neutral-700 mb-1">Preferred ecosystem</label>
+                    <label class="block text-sm text-neutral-700 mb-1"
+                      >Preferred ecosystem</label
+                    >
                     <select id="ecosystem" class="input-field w-48">
-                      <option value="Any" selected>Any</option>
+                      <option value="Any">Any</option>
                       <option value="Chase">Chase</option>
                       <option value="Amex">Amex</option>
                       <option value="Capital One">Capital One</option>
@@ -49,60 +74,153 @@
                   </div>
 
                   <div class="pt-2">
-                    <span class="block text-sm text-neutral-700 mb-1">Travel frequency</span>
+                    <span class="block text-sm text-neutral-700 mb-1"
+                      >Travel frequency</span
+                    >
                     <div class="flex gap-3 text-sm">
-                      <label><input type="radio" name="travelFrequency" id="travel_never" value="Never" checked /> Never</label>
-                      <label><input type="radio" name="travelFrequency" id="travel_sometimes" value="Sometimes" /> Sometimes</label>
-                      <label><input type="radio" name="travelFrequency" id="travel_often" value="Often" /> Often</label>
+                      <label
+                        ><input
+                          type="radio"
+                          name="travelFrequency"
+                          value="Never"
+                          checked
+                        />
+                        Never</label
+                      >
+                      <label
+                        ><input
+                          type="radio"
+                          name="travelFrequency"
+                          value="Sometimes"
+                        />
+                        Sometimes</label
+                      >
+                      <label
+                        ><input
+                          type="radio"
+                          name="travelPreference"
+                          value="Often"
+                        />
+                        Often</label
+                      >
                     </div>
                   </div>
 
                   <div class="pt-2">
-                    <span class="block text-sm text-neutral-700 mb-1">Preferred reward type</span>
+                    <span class="block text-sm text-neutral-700 mb-1"
+                      >Preferred reward type</span
+                    >
                     <div class="flex gap-3 text-sm">
-                      <label><input type="radio" name="rewardPreference" id="reward_cashback" value="Cash Back" checked /> Cash Back</label>
-                      <label><input type="radio" name="rewardPreference" id="reward_points" value="Points/Miles" /> Points/Miles</label>
+                      <label
+                        ><input
+                          type="radio"
+                          name="rewardPreference"
+                          value="Cash Back"
+                          checked
+                        />
+                        Cash Back</label
+                      >
+                      <label
+                        ><input
+                          type="radio"
+                          name="rewardPreference"
+                          value="Points/Miles"
+                        />
+                        Points/Miles</label
+                      >
                     </div>
                   </div>
 
-                  <!-- Owned cards: populated dynamically by main.js into this container -->
-                  <div class="pt-3">
-                    <label class="block text-sm text-neutral-700 mb-1">Owned cards</label>
-                    <div id="ownedCardsList" class="grid grid-cols-1 gap-2 text-sm text-neutral-800"></div>
+                  <div class="pt-2">
+                    <label class="block text-sm text-neutral-700 mb-1"
+                      >Cards you already own (optional, comma separated)</label
+                    >
+                    <input
+                      id="ownedCards"
+                      type="text"
+                      placeholder="Chase Freedom Flex, Amex Gold"
+                      class="input-field w-full"
+                    />
                   </div>
                 </div>
               </section>
 
-              <section id="spending" class="p-4 bg-gradient-to-b from-white to-neutral-50 rounded-lg border border-neutral-100">
+              <!-- SPENDING PANEL -->
+              <section
+                id="spending"
+                class="p-4 bg-gradient-to-b from-white to-neutral-50 rounded-lg border border-neutral-100"
+              >
                 <h2 class="text-lg font-medium mb-3">Monthly spending (USD)</h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <label class="block text-sm text-neutral-700">Groceries
-                    <input id="spend_groceries" type="number" value="400" class="input-field mt-1 w-full" />
-                  </label>
-                  <label class="block text-sm text-neutral-700">Dining
-                    <input id="spend_dining" type="number" value="200" class="input-field mt-1 w-full" />
-                  </label>
-                  <label class="block text-sm text-neutral-700">Travel
-                    <input id="spend_travel" type="number" value="100" class="input-field mt-1 w-full" />
-                  </label>
-                  <label class="block text-sm text-neutral-700">Other
-                    <input id="spend_other" type="number" value="0" class="input-field mt-1 w-full" />
-                  </label>
+                  <label class="block text-sm text-neutral-700"
+                    >Groceries
+                    <input
+                      id="spend_groceries"
+                      type="number"
+                      value="400"
+                      class="input-field mt-1 w-full"
+                  /></label>
+
+                  <label class="block text-sm text-neutral-700"
+                    >Dining
+                    <input
+                      id="spend_dining"
+                      type="number"
+                      value="200"
+                      class="input-field mt-1 w-full"
+                  /></label>
+
+                  <label class="block text-sm text-neutral-700"
+                    >Travel
+                    <input
+                      id="spend_travel"
+                      type="number"
+                      value="100"
+                      class="input-field mt-1 w-full"
+                  /></label>
+
+                  <label class="block text-sm text-neutral-700"
+                    >Gas
+                    <input
+                      id="spend_gas"
+                      type="number"
+                      value="0"
+                      class="input-field mt-1 w-full"
+                  /></label>
+
+                  <label class="block text-sm text-neutral-700"
+                    >Other
+                    <input
+                      id="spend_other"
+                      type="number"
+                      value="50"
+                      class="input-field mt-1 w-full"
+                  /></label>
                 </div>
               </section>
             </div>
 
-            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <div
+              class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3"
+            >
               <div class="flex gap-3">
-                <button id="btnRecommend" class="btn-primary">Get Recommendations</button>
-                <button id="btnLoadSample" class="btn-ghost">Load Sample Data</button>
+                <button id="btnRecommend" class="btn-primary">
+                  Get Recommendations
+                </button>
+                <button id="btnLoadSample" class="btn-ghost">
+                  Load Sample Data
+                </button>
               </div>
-              <div class="text-sm text-neutral-500">Estimated results appear below after calculation</div>
+              <div class="text-sm text-neutral-500">
+                Estimated results appear below after calculation
+              </div>
             </div>
 
-            <section id="results" class="results-panel p-4 bg-neutral-50 rounded-lg border border-neutral-100">
-              <!-- Results rendered by JS -->
-            </section>
+            <!-- RESULTS -->
+            <section
+              id="results"
+              class="results-panel p-4 bg-neutral-50 rounded-lg border border-neutral-100"
+            ></section>
           </div>
         </main>
       </div>

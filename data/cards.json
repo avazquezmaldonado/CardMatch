@@ -4,12 +4,14 @@
     "name": "Chase Freedom Flex",
     "issuer": "Chase",
     "ecosystem": "Chase",
-    "level": "Mid",
+    "level": "Beginner",
     "secured": false,
     "studentFriendly": false,
     "rotatingCategories": true,
     "unlockTransferPartners": false,
     "minCreditScore": 690,
+    "annualFee": 0,
+    "pointValueCents": 1.0,
     "rewards": {
       "groceries": 3,
       "dining": 3,
@@ -30,6 +32,8 @@
     "rotatingCategories": false,
     "unlockTransferPartners": false,
     "minCreditScore": 690,
+    "annualFee": 0,
+    "pointValueCents": 1.0,
     "rewards": {
       "groceries": 1,
       "dining": 3,
@@ -44,12 +48,14 @@
     "name": "Discover It Cash Back",
     "issuer": "Discover",
     "ecosystem": "Discover",
-    "level": "Student",
+    "level": "Beginner",
     "secured": false,
     "studentFriendly": true,
     "rotatingCategories": true,
     "unlockTransferPartners": false,
     "minCreditScore": 670,
+    "annualFee": 0,
+    "pointValueCents": 1.0,
     "rewards": {
       "groceries": 5,
       "dining": 1,
@@ -70,6 +76,8 @@
     "rotatingCategories": false,
     "unlockTransferPartners": false,
     "minCreditScore": 700,
+    "annualFee": 95,
+    "pointValueCents": 1.0,
     "rewards": {
       "groceries": 6,
       "dining": 1,
@@ -90,6 +98,8 @@
     "rotatingCategories": false,
     "unlockTransferPartners": true,
     "minCreditScore": 720,
+    "annualFee": 250,
+    "pointValueCents": 0.96,
     "rewards": {
       "groceries": 4,
       "dining": 4,
@@ -110,6 +120,8 @@
     "rotatingCategories": false,
     "unlockTransferPartners": false,
     "minCreditScore": 680,
+    "annualFee": 0,
+    "pointValueCents": 1.0,
     "rewards": {
       "groceries": 5,
       "dining": 5,
@@ -130,6 +142,8 @@
     "rotatingCategories": false,
     "unlockTransferPartners": false,
     "minCreditScore": 700,
+    "annualFee": 0,
+    "pointValueCents": 1.0,
     "rewards": {
       "groceries": 3,
       "dining": 3,
@@ -150,6 +164,8 @@
     "rotatingCategories": false,
     "unlockTransferPartners": false,
     "minCreditScore": 690,
+    "annualFee": 0,
+    "pointValueCents": 1.0,
     "rewards": {
       "groceries": 3,
       "dining": 3,
@@ -170,6 +186,8 @@
     "rotatingCategories": false,
     "unlockTransferPartners": true,
     "minCreditScore": 700,
+    "annualFee": 0,
+    "pointValueCents": 1.0,
     "rewards": {
       "groceries": 1,
       "dining": 1,
@@ -190,6 +208,8 @@
     "rotatingCategories": false,
     "unlockTransferPartners": true,
     "minCreditScore": 720,
+    "annualFee": 95,
+    "pointValueCents": 1.25,
     "rewards": {
       "groceries": 2,
       "dining": 3,
@@ -210,6 +230,8 @@
     "rotatingCategories": false,
     "unlockTransferPartners": false,
     "minCreditScore": 680,
+    "annualFee": 0,
+    "pointValueCents": 1.0,
     "rewards": {
       "groceries": 3,
       "dining": 1,
@@ -230,6 +252,8 @@
     "rotatingCategories": false,
     "unlockTransferPartners": false,
     "minCreditScore": 700,
+    "annualFee": 0,
+    "pointValueCents": 1.0,
     "rewards": {
       "groceries": 2,
       "dining": 2,
@@ -250,6 +274,8 @@
     "rotatingCategories": false,
     "unlockTransferPartners": false,
     "minCreditScore": 300,
+    "annualFee": 0,
+    "pointValueCents": 1.0,
     "rewards": {
       "groceries": 1,
       "dining": 1,
@@ -270,6 +296,8 @@
     "rotatingCategories": false,
     "unlockTransferPartners": false,
     "minCreditScore": 300,
+    "annualFee": 0,
+    "pointValueCents": 1.0,
     "rewards": {
       "groceries": 2,
       "dining": 2,
@@ -277,6 +305,165 @@
       "gas": 1,
       "other": 1,
       "default": 1
+    }
+  },
+  {
+    "id": 15,
+    "name": "Amex Platinum",
+    "issuer": "American Express",
+    "ecosystem": "American Express",
+    "level": "Premium",
+    "secured": false,
+    "studentFriendly": false,
+    "rotatingCategories": false,
+    "unlockTransferPartners": true,
+    "minCreditScore": 720,
+    "annualFee": 695,
+    "pointValueCents": 1.2,
+    "rewards": {
+      "travel": 5,
+      "dining": 1,
+      "groceries": 1,
+      "gas": 1,
+      "other": 1,
+      "default": 1
+    }
+  },
+  {
+    "id": 16,
+    "name": "Chase Sapphire Reserve",
+    "issuer": "Chase",
+    "ecosystem": "Chase",
+    "level": "Premium",
+    "secured": false,
+    "studentFriendly": false,
+    "rotatingCategories": false,
+    "unlockTransferPartners": true,
+    "minCreditScore": 730,
+    "annualFee": 550,
+    "pointValueCents": 1.5,
+    "rewards": {
+      "travel": 3,
+      "dining": 3,
+      "groceries": 1,
+      "gas": 1,
+      "other": 1,
+      "default": 1
+    }
+  },
+  {
+    "id": 17,
+    "name": "Discover It Student Chrome",
+    "issuer": "Discover",
+    "ecosystem": "Discover",
+    "level": "Student",
+    "secured": false,
+    "studentFriendly": true,
+    "rotatingCategories": true,
+    "unlockTransferPartners": false,
+    "minCreditScore": 300,
+    "annualFee": 0,
+    "pointValueCents": 1.0,
+    "rewards": {
+      "groceries": 2,
+      "dining": 2,
+      "gas": 2,
+      "other": 1,
+      "default": 1
+    }
+  },
+  {
+    "id": 18,
+    "name": "Capital One Venture X",
+    "issuer": "Capital One",
+    "ecosystem": "Capital One",
+    "level": "Premium",
+    "secured": false,
+    "studentFriendly": false,
+    "rotatingCategories": false,
+    "unlockTransferPartners": true,
+    "minCreditScore": 720,
+    "annualFee": 395,
+    "pointValueCents": 1.5,
+    "rewards": {
+      "travel": 2,
+      "other": 2,
+      "default": 2
+    }
+  },
+  {
+    "id": 19,
+    "name": "Amazon Prime Visa",
+    "issuer": "Chase",
+    "ecosystem": "Chase",
+    "level": "Mid",
+    "secured": false,
+    "studentFriendly": false,
+    "rotatingCategories": false,
+    "unlockTransferPartners": false,
+    "minCreditScore": 680,
+    "annualFee": 0,
+    "pointValueCents": 1.0,
+    "rewards": {
+      "groceries": 2,
+      "amazon": 5,
+      "gas": 2,
+      "other": 1,
+      "default": 1
+    }
+  },
+  {
+    "id": 20,
+    "name": "Target RedCard",
+    "issuer": "TD Bank",
+    "ecosystem": "Target",
+    "level": "Store",
+    "secured": false,
+    "studentFriendly": false,
+    "rotatingCategories": false,
+    "unlockTransferPartners": false,
+    "minCreditScore": 600,
+    "annualFee": 0,
+    "pointValueCents": 1.0,
+    "rewards": {
+      "target": 5,
+      "default": 1
+    }
+  },
+  {
+    "id": 21,
+    "name": "Best Buy Visa",
+    "issuer": "Citi",
+    "ecosystem": "Citi",
+    "level": "Store",
+    "secured": false,
+    "studentFriendly": false,
+    "rotatingCategories": false,
+    "unlockTransferPartners": false,
+    "minCreditScore": 640,
+    "annualFee": 0,
+    "pointValueCents": 1.0,
+    "rewards": {
+      "electronics": 5,
+      "default": 1
+    }
+  },
+  {
+    "id": 22,
+    "name": "Navy Federal Cash Rewards",
+    "issuer": "NFCU",
+    "ecosystem": "NFCU",
+    "level": "Beginner",
+    "secured": false,
+    "studentFriendly": false,
+    "rotatingCategories": false,
+    "unlockTransferPartners": false,
+    "minCreditScore": 600,
+    "annualFee": 0,
+    "pointValueCents": 1.0,
+    "rewards": {
+      "groceries": 2,
+      "default": 1.5
     }
   }
 ]

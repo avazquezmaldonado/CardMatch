@@ -1,40 +1,150 @@
-# CardMatch
+# CardMatch — Credit Card Recommendation Engine
 
-CardMatch is a capstone project (CSCI 4208) — a small web app that recommends and optimizes credit cards for a user based on their spending, credit score, number of recent accounts opened (5/24), and cards they already hold.
+CardMatch is a capstone project (CSCI 4208) — a web application that recommends credit cards based on a user's spending profile, credit score, and preferences.
 
-This repo contains lightweight frontend and backend scaffolding, JSON-based data, and documentation for the 9 capstone milestones.
+## Overview
 
-Quick start (development):
+This project demonstrates full-stack web development with:
+- **Frontend**: HTML + Tailwind CSS + vanilla JavaScript
+- **Backend**: Node.js + Express API
+- **Data**: JSON-based card catalog and user profiles
+- **Documentation**: 9 milestone capstone documents
 
-1. Backend
+## Features
 
-- Install dependencies and run the server
+✅ **Dynamic Recommendations** — Personalized card rankings based on user spending  
+✅ **Deterministic Scoring** — Clear annual value calculation (rewards minus fees)  
+✅ **Eligibility Filtering** — Credit score and student status checks  
+✅ **Category Breakdown** — Best card for each spending category  
+✅ **Responsive Design** — Works on desktop and mobile  
+✅ **Real-time Results** — Instant feedback as users adjust inputs  
 
+## Quick Start
+
+### Backend Setup
 ```bash
 cd backend
 npm install
-node app.js
+npm start
+```
+Backend runs on **http://localhost:4000**
+
+### Frontend Setup
+Open `frontend/index.html` in a browser, or run a simple HTTP server:
+```bash
+python3 -m http.server 8000
+# Visit http://localhost:8000/frontend/
 ```
 
-The backend runs on port 4000 by default and serves a few API routes described in `/backend`.
+## API
 
-2. Frontend
+**POST** `/api/cards/recommend`
 
-Open `frontend/index.html` in a browser (it uses fetch to call the backend on localhost:4000).
+Request:
+```json
+{
+  "profile": {
+    "creditScore": 750,
+    "accountsOpened24": 2,
+    "isStudent": false,
+    "preferredEcosystem": "Chase",
+    "travelFrequency": "Often",
+    "rewardPreference": "Points/Miles"
+  },
+  "spending": {
+    "groceries": 400,
+    "dining": 200,
+    "travel": 150,
+    "other": 100
+  }
+}
+```
 
-Files & folders
+Response:
+```json
+{
+  "bestByCategory": {
+    "groceries": { "name": "Amex Gold", "rate": 4 },
+    "dining": { "name": "Chase Sapphire Preferred", "rate": 3 }
+  },
+  "bestOverall": [
+    { "name": "Card Name", "estimates": { "annual": 1250 } },
+    { "name": "Card Name 2", "estimates": { "annual": 1100 } },
+    { "name": "Card Name 3", "estimates": { "annual": 950 } }
+  ]
+}
+```
 
-- `/frontend` — static frontend (HTML + Tailwind + vanilla JS)
-- `/backend` — Node.js + Express server scaffolding, simple JSON datastore access, and rewards service
-- `/data` — sample JSON files (cards, user profile, spending)
-- `/docs` — milestone documentation drafts
+## Project Structure
 
-Next steps
+```
+CardMatch/
+├── backend/
+│   ├── app.js              # Express entrypoint
+│   ├── package.json
+│   ├── routes/
+│   │   └── cards.js        # API routes
+│   ├── controllers/
+│   │   └── cardsController.js
+│   └── services/
+│       ├── dataStore.js
+│       └── rewardsService.js
+├── frontend/
+│   ├── index.html
+│   ├── styles.css
+│   └── src/
+│       └── main.js
+├── data/
+│   ├── cards.json          # 14 credit cards with metadata
+│   ├── profile.json
+│   └── spending.json
+├── docs/
+│   ├── capstone-01.md through capstone-09-final-demo.md
+│   └── (9 milestone documents)
+└── README.md (this file)
+```
 
-- Implement server persistence or swap to SQLite
-- Add authentication and user management (optional)
-- Improve recommendation algorithms and add tests
-- Deploy frontend (Netlify) and backend (Render) — see milestone 9 draft in `/docs`.
+## Capstone Milestones
 
-Author: Angel Vazquez Maldonado
-Date: 2025-11-14
+| Milestone | Title | Status |
+|-----------|-------|--------|
+| 01 | Project Proposal | ✅ Complete |
+| 02 | Planning & Specification | ✅ Complete |
+| 03 | Frontend Design | ✅ Complete |
+| 04 | Backend Design | ✅ Complete |
+| 05 | Data Design | ✅ Complete |
+| 06 | Client Audit | ✅ Complete |
+| 07 | Server Audit | ✅ Complete |
+| 08 | Data Audit | ✅ Complete |
+| 09 | Final Demo & Submission | ✅ Complete |
+
+All milestone documentation is in `/docs`.
+
+## Testing
+
+### Manual Testing
+1. Start the backend: `npm start` (from `/backend`)
+2. Open `frontend/index.html` in browser
+3. Enter credit score, spending amounts, and preferences
+4. Click "Get Recommendations"
+5. Verify results display below form
+
+### Sample Data
+Click "Load Sample Data" to populate the form with test values.
+
+## Technologies Used
+
+- **Frontend**: HTML5, Tailwind CSS, Vanilla JavaScript (ES6+)
+- **Backend**: Node.js, Express.js
+- **Data**: JSON files
+- **Documentation**: Markdown
+
+## Author
+
+Angel Vazquez Maldonado  
+CSCI 4208 Capstone Project  
+December 2025
+
+---
+
+**For submission**: All milestones are complete and documented. The application is functional and ready for demonstration.

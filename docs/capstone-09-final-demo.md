@@ -2,35 +2,33 @@
 
 ## Project Summary: CardMatch
 
-CardMatch is a credit card recommendation engine that helps users find the best credit cards based on their financial profile, spending patterns, and preferences. The app uses a sophisticated scoring system with 9 distinct rules to personalize recommendations.
+CardMatch is a credit card recommendation engine that helps users find the best credit cards based on their financial profile, spending patterns, and preferences. The app features a clean, responsive web interface and a deterministic scoring system that personalizes recommendations based on user inputs.
 
 ---
 
 ## Key Features Implemented
 
-### Rules Engine (9 Business Rules)
-- **Rule A: Chase 5/24** — Users who opened 5+ accounts in 24 months cannot qualify for Chase cards
-- **Rule B: Low Credit Score Gating** — Credit scores < 630 see only secured/beginner/student cards; 630-679 excludes premium cards
-- **Rule C: Student Logic** — Students get 1.20x boost on student-friendly cards
-- **Rule D: Ecosystem Preference** — Users selecting a preferred issuer (Chase/Amex/Capital One) get 1.10x boost on matching cards
-- **Rule E: Ecosystem Synergy** — Ownership of key cards unlocks 1.40x boosts on premium products (e.g., Freedom → Sapphire)
-- **Rule F: Reward Type Preference** — Cash back users boosted on flat-rate cards; Points/Miles users boosted on travel-heavy cards
-- **Rule G: Travel Frequency** — "Often" travelers get 1.10x on travel rewards; "Never" travelers penalized on travel cards and boosted on cashback
-- **Rule H: Rotating Categories** — Cards with rotating categories receive 1.05x boost
-- **Rule I: Transfer Partners** — Cards unlocking transfer partners get 1.40x if user owns a points-earning card in the ecosystem
+### Scoring Algorithm
+- **Credit Score Eligibility** — Cards are filtered by minCreditScore requirement
+- **Student Eligibility** — Student-only cards are only shown to student users
+- **Monthly Spend Calculation** — For each spending category, the system computes: (monthly spend × 12 × category multiplier × pointValueCents / 100)
+- **Annual Rewards** — Sums rewards across all spending categories and subtracts annual fees
+- **Dynamic Ranking** — Cards are ranked by annual value; top 3 are recommended
+- **Best by Category** — For each spending category, the highest-earning card is highlighted
 
 ### Data Model
-- **14 credit cards** (spanning Beginner, Mid, Premium, Student, and Secured levels)
+- **14 credit cards** with detailed metadata (issuer, annual fee, bonus multipliers per category, point value)
 - **4 spending categories** (Groceries, Dining, Travel, Other)
-- **User profile fields**: creditScore, accountsOpened24, isStudent, preferredEcosystem, travelFrequency, rewardPreference
-- **Card metadata**: issuer, ecosystem, level, secured, studentFriendly, rotatingCategories, unlockTransferPartners, minCreditScore, rewards
+- **User profile fields**: creditScore, accountsOpened24 (for eligibility checks), isStudent, preferredEcosystem, travelFrequency, rewardPreference
+- **Card eligibility**: minCreditScore requirement per card
 
-### UI/UX Improvements
+### UI/UX Features
 - Clean, centered design using Tailwind CSS + Inter font
 - Responsive grid layout (Profile + Spending side-by-side on desktop, stacked on mobile)
-- Dynamic owned-cards checkbox population from backend
-- Real-time recommendation results
-- Removed redundant output (now shows only **Best by Category** + **Top 3 Cards**)
+- Real-time recommendation results displayed below form
+- Output shows **Best by Category** + **Top 3 Recommended Cards**
+- Load Sample Data button for quick testing
+- Get Recommendations button triggers backend calculation
 
 ---
 

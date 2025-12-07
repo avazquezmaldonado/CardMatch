@@ -2,5 +2,12 @@
   "name": "Example User",
   "creditScore": 720,
   "accountsOpened24": 1,
-  "ownedCards": [ "c4" ]
+  "annualIncome": 85000,
+  "monthlySpending": {
+    "groceries": 500,
+    "dining": 300,
+    "travel": 150,
+    "gas": 100,
+    "other": 200
+  }
 }
