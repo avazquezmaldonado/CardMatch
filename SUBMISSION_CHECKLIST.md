@@ -141,7 +141,7 @@ All 9 milestones are complete and documented. The application is fully functiona
 - Responsive front-end UI
 - Clear project documentation
 
----
+----
 
 **Last Updated**: December 7, 2025  
 **Author**: Angel Vazquez Maldonado  

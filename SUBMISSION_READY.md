@@ -55,7 +55,7 @@
 - [x] Owned cards display correctly
 - [x] Results simplified (no per-card list, just best 3)
 
----
+----
 
 ## 🚀 How to Run
 
@@ -78,7 +78,7 @@ python3 -m http.server 8000
 # Then visit http://localhost:8000/frontend/
 ```
 
----
+----
 
 ## 📋 Demo Script (use capstone-09-final-demo.md)
 
@@ -89,7 +89,7 @@ Three scenarios provided:
 
 Each scenario shows different top 3 results proving the rules work.
 
----
+----
 
 ## 🎯 What's Different Now vs Earlier
 
@@ -100,7 +100,7 @@ Each scenario shows different top 3 results proving the rules work.
 - JSON cleaned and validated
 - All 9 rules implemented and tested
 
----
+----
 
 ## 📦 Deployment Option
 
@@ -108,7 +108,7 @@ Each scenario shows different top 3 results proving the rules work.
 **Backend**: Render (or Heroku)  
 See capstone-09-final-demo.md for detailed steps.
 
----
+----
 
 ## ✨ Summary
 
@@ -120,4 +120,3 @@ CardMatch is a fully functional credit card recommendation engine with:
 - Proper data layer
 
 **Ready to submit!**
-
