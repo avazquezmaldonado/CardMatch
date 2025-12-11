@@ -222,6 +222,33 @@ function recommendCards(cards, profile, spending, ownedCards = []) {
     const adjustedAnnual = Number((base.annual * multiplier).toFixed(2));
     const adjustedMonthly = Number((adjustedAnnual / 12).toFixed(2));
 
+    // Calculate weighted average rate based on user's spending
+    let weightedRate = 0;
+    let totalSpending = 0;
+    for (const [cat, amount] of Object.entries(spending || {})) {
+      const rate = (card.rewards && (card.rewards[cat] || card.rewards.default)) || 0;
+      weightedRate += rate * amount;
+      totalSpending += amount;
+    }
+    const avgRate = totalSpending > 0 ? Number((weightedRate / totalSpending).toFixed(2)) : 0;
+
+    // Get top reward categories for display
+    const rewardCategories = [];
+    if (card.rewards) {
+      // Get all categories with their rates, excluding 'default'
+      const categories = Object.entries(card.rewards)
+        .filter(([cat, rate]) => cat !== 'default' && rate > 1)
+        .sort((a, b) => b[1] - a[1]) // Sort by rate descending
+        .slice(0, 3); // Get top 3
+      
+      for (const [cat, rate] of categories) {
+        rewardCategories.push({
+          category: cat.charAt(0).toUpperCase() + cat.slice(1),
+          rate: rate
+        });
+      }
+    }
+
     return {
       id: card.id,
       name: card.name,
@@ -229,6 +256,10 @@ function recommendCards(cards, profile, spending, ownedCards = []) {
         monthly: adjustedMonthly,
         annual: adjustedAnnual
       },
+      rate: avgRate, // Weighted average rate based on spending
+      rewardCategories: rewardCategories, // Top reward categories
+      annualFee: card.annualFee || 0,
+      level: card.level || 'Mid',
       owned: ownedNames.has(card.name),
       reasons // Explanation list for why this card scored well
     };
