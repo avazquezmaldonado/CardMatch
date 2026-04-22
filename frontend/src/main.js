@@ -40,9 +40,14 @@ async function recommend() {
   const body = { profile, spending };
   console.log('Sending request to backend:', body);
   
+  // Use Vercel backend in production, localhost when developing
+  const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? 'http://localhost:4000'
+    : 'https://card-match-three.vercel.app';
+
   // Try to fetch recommendations from the backend
   try {
-    const res = await fetch('http://localhost:4000/api/cards/recommend', {
+    const res = await fetch(`${API_URL}/api/cards/recommend`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body)
@@ -63,7 +68,7 @@ async function recommend() {
     document.getElementById('btnExport').style.display = 'inline-block';
   } catch (err) {
     console.error('Error:', err);
-    alert('Error fetching recommendations. Make sure backend is running on port 4000.');
+    alert('Error fetching recommendations. Please try again.');
   }
 }
 
