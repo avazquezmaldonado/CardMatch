@@ -8,8 +8,8 @@ const router = express.Router();
 const cards = require("../../data/cards.json");
 // Import the recommendation logic
 const { recommendCards } = require("../services/rewardsService");
-// Import validation
-const { validateRecommendRequest } = require("../services/validator");
+// Import Joi validation middleware
+const { validateRecommendRequest } = require("../middleware/validateRecommendRequest");
 
 // GET /api/cards – return all cards
 router.get("/", (req, res) => {
@@ -25,18 +25,11 @@ router.get("/:id", (req, res) => {
 });
 
 // POST /api/cards/recommend – compute recommendations
-router.post("/recommend", (req, res) => {
+router.post("/recommend", validateRecommendRequest, (req, res) => {
   try {
-    // Extract data from request body
+    // Extract data from request body (already validated by middleware)
     const { profile, spending, ownedCards = [] } = req.body;
-    
-    // Validate the request
-    const validation = validateRecommendRequest(profile, spending, ownedCards);
-    if (!validation.valid) {
-      // Return 400 for validation errors (not 500)
-      return res.status(400).json({ error: validation.error });
-    }
-    
+
     // Call the recommendation service
     const result = recommendCards(cards, profile, spending, ownedCards);
     // Send back the results

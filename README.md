@@ -7,6 +7,8 @@ CardMatch is a capstone project (CSCI 4208) — a web application that recommend
 This project demonstrates full-stack web development with:
 - **Frontend**: HTML + Tailwind CSS + vanilla JavaScript
 - **Backend**: Node.js + Express API
+- **Validation**: Joi middleware on all API inputs
+- **Tests**: Jest unit tests (39 passing)
 - **Data**: JSON-based card catalog and user profiles
 - **Documentation**: 9 milestone capstone documents
 
@@ -76,7 +78,7 @@ Request:
 }
 ```
 
-Response:
+Success response (200):
 ```json
 {
   "bestByCategory": {
@@ -91,17 +93,31 @@ Response:
 }
 ```
 
+Validation error (400):
+```json
+{
+  "error": "VALIDATION_ERROR",
+  "fields": { "profile.creditScore": "must be less than or equal to 850" }
+}
+```
+
 ## Project Structure
 
 ```
 CardMatch/
 ├── backend/
 │   ├── app.js              # Express server
+│   ├── middleware/
+│   │   └── validateRecommendRequest.js  # Joi validation middleware
 │   ├── routes/cards.js     # API routes
 │   ├── controllers/cardsController.js
 │   ├── services/
 │   │   ├── dataStore.js
 │   │   └── rewardsService.js  # Scoring logic
+│   ├── tests/
+│   │   ├── rewardsService.test.js       # Unit tests — scoring
+│   │   └── unit/
+│   │       └── validateRecommendRequest.test.js  # Unit tests — validation
 │   └── package.json
 ├── frontend/
 │   ├── index.html
@@ -135,6 +151,17 @@ All documentation is in `/docs`.
 
 ## Testing
 
+### Automated Tests
+
+```bash
+cd backend
+npm test
+```
+
+39 tests across 2 suites:
+- `rewardsService.test.js` — eligibility filter, reward calculation, ranking, category winners
+- `unit/validateRecommendRequest.test.js` — valid input, invalid input, missing required fields
+
 ### Manual Testing
 1. Start backend: `npm start`
 2. Open `frontend/index.html`
@@ -146,6 +173,15 @@ All documentation is in `/docs`.
 - Credit score: 750, Spending: $400 groceries → See recommendations
 - Credit score: 600, Spending: $200 dining → See beginner cards only
 - Click "Load Sample Data" for quick test
+
+## Upgrade Roadmap
+
+| Phase | Goal | Status |
+|---|---|---|
+| 1 | Joi validation middleware | Complete |
+| 2 | Full Jest + Supertest test suite + CI | Planned |
+| 3 | SQLite migration + recommendation logging | Planned |
+| 4 | Explainability field in API response | Planned |
 
 ## Key Decisions
 
@@ -169,4 +205,5 @@ December 2025
 
 ---
 
-**Status**: Complete and ready for evaluation. All 9 milestones documented.
+**Capstone status**: Complete — all 9 milestones documented.
+**Active development**: Phase 1 (validation) complete. Phase 2–4 in progress.
